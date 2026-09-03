@@ -1,10 +1,8 @@
 import React from 'react'
-
 import data from '../data/data.json'
 
 function Skills() {
-
-    const { skills } = data.data
+    const { skills, fullName } = data.data
     const iconpath = "/images/icons/"
 
     return (
@@ -16,23 +14,24 @@ function Skills() {
                 <div className="skill-content">
                     <div className="experience-details-container">
                         <div className="about-containers">
-                            {
-                                skills.map((item) => (
-                                    <div className="details-container">
-                                        <h2 className="experience-sub-title">{item.title}</h2>
-                                        <div className="article-container">
-                                            {
-                                                item.skillname.map((skillnames) => (
-                                                    <button type="button" className="btn btn-lg skill-btn" disabled>
-                                                        <img src={iconpath + skillnames.image + ".png"} className="skill-icon mx-2" alt='Vandit Shah Skills - icons' />
-                                                        {skillnames.name}
-                                                    </button>
-                                                ))
-                                            }
-                                        </div>
+                            {skills.map((item, index) => (
+                                <div key={index} className="details-container">
+                                    <h2 className="experience-sub-title">{item.title}</h2>
+                                    <div className="article-container">
+                                        {item.skillname.map((skillnames, idx) => (
+                                            <button key={idx} type="button" className="btn btn-lg skill-btn my-1" disabled>
+                                                <img
+                                                    src={iconpath + skillnames.image + ".png"}
+                                                    className="skill-icon mx-2"
+                                                    alt={`${skillnames.name} - ${fullName} Skills`}
+                                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                                />
+                                                {skillnames.name}
+                                            </button>
+                                        ))}
                                     </div>
-                                ))
-                            }
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
